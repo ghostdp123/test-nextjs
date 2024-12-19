@@ -1,11 +1,10 @@
-
 import { neon } from '@neondatabase/serverless'
 import { NextResponse } from 'next/server'
 
 const sql = neon(`${process.env.DATABASE_URL}`)
 
 export async function GET() {
-  const result = await sql`SELECT * FROM comments`
+  const result = await sql('SELECT * FROM comments')
   return NextResponse.json({
     code: 0,
     data: result
