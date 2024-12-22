@@ -1,6 +1,6 @@
 'use client'
 
-import Image from "next/image";
+import Image from "next/image"
 import { useSortStore } from "@/store"
 import { Product } from "@/types/global"
 
