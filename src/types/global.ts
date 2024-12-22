@@ -7,3 +7,5 @@ export type Product = {
   image: string
   variant: string
 }
+
+export type SortValue = 'latest' | 'low' | 'high'
