@@ -1,7 +1,10 @@
+'use client'
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
+import { useCartStore } from "@/store"
 
-export default async function Header() {
+export default function Header() {
+  const { cartList } = useCartStore()
   return (
     <header className="relative flex justify-between h-16 px-10 border-b bg-white">
       <div className="container flex items-center justify-between h-full">
@@ -13,7 +16,7 @@ export default async function Header() {
           <Separator orientation="vertical" />
           <Link href="/account">Account</Link>
           <Separator orientation="vertical" />
-          <Link href="/cart">Cart</Link>
+          <Link href="/cart">Cart { cartList.length ? '(' + cartList.length + ')' : '' }</Link>
         </ul>
       </div>
     </header>

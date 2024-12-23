@@ -9,3 +9,9 @@ export type Product = {
 }
 
 export type SortValue = 'latest' | 'low' | 'high'
+
+export type CartItem = {
+  product: Product
+  quantity: number
+  selectedVariant: string
+}
