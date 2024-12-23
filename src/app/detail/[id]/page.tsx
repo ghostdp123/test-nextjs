@@ -1,7 +1,7 @@
 
 import { Product } from "@/types/global"
-import Image from "next/image"
-import { AddCart } from "@/components"
+// import Image from "next/image"
+// import { AddCart } from "@/components"
 
 export const dynamicParams = false
 
@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
+  // const { id } = await params
   // const response = await fetch(`${process.env.NEXT_BASE_URL}/api/products/${id}`)
   // const result: { code: number; data: Product } = await response.json()
   // const product = result.data
