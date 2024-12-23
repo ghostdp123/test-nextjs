@@ -5,7 +5,7 @@ export type Product = {
   price: number
   description: string
   image: string
-  variant: string
+  variant: string[]
 }
 
 export type SortValue = 'latest' | 'low' | 'high'

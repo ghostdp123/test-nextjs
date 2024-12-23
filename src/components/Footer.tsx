@@ -3,7 +3,7 @@ import Link from "next/link";
 export default async function Footer() {
   return (
     <footer className="border-t w-full mt-6">
-      <div className="py-32 flex justify-between w-[1140px] mx-auto">
+      <div className="container py-32 flex justify-between">
         <h2 className="text-2xl">
           <Link href="/">DUYI Store</Link>
         </h2>

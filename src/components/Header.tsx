@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator"
 export default async function Header() {
   return (
     <header className="relative flex justify-between h-16 px-10 border-b bg-white">
-      <div className="w-[1140px] mx-auto flex items-center justify-between h-full">
+      <div className="container flex items-center justify-between h-full">
         <h1 className="flex items-center h-full text-2xl">
           <Link href="/">DUYI Store</Link>
         </h1>  

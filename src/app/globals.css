@@ -70,3 +70,8 @@ body {
     @apply bg-background text-foreground;
   }
 }
+@layer components {
+  .container {
+    @apply mx-auto w-[1140px];
+  }
+}

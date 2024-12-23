@@ -2,12 +2,12 @@ import { Sort, Products } from "@/components"
 import { Product } from "@/types/global"
 
 export default async function Page() {
-  const res = await fetch(`${process.env.NEXT_BASE_URL}/api/products`)
-  const products: { code: number; data: Product[] } = await res.json()
+  const response = await fetch(`${process.env.NEXT_BASE_URL}/api/products`)
+  const result: { code: number; data: Product[] } = await response.json()
   return (
-    <div className="flex mx-auto py-6 w-[1140px]">
+    <div className="container flex py-6">
       <Sort />
-      <Products products={products} />
+      <Products result={result} />
     </div>
   )
 }

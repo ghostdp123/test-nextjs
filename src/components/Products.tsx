@@ -3,19 +3,24 @@
 import Image from "next/image"
 import { useSortStore } from "@/store"
 import { Product } from "@/types/global"
+import { useRouter } from "next/navigation"
 
-export default function Products({ products }: { products: { code: number; data: Product[] } }) {
+export default function Products({ result }: { result: { code: number; data: Product[] } }) {
   const { value } = useSortStore()
-  const filteredProducts = [...products.data]
+  const products = [...result.data]
   if (value !== 'latest') {
-    filteredProducts.sort((a, b) => value === 'low' ? a.price - b.price : b.price - a.price)
+    products.sort((a, b) => value === 'low' ? a.price - b.price : b.price - a.price)
+  }
+  const router = useRouter()
+  const handleClick = (id: string) => {
+    router.push(`/detail/${id}`)
   }
   return (
     <div className="flex-1">
       <h1 className="mb-8 text-4xl">All products</h1>
       <div className="grid grid-cols-3 gap-4">
-        {filteredProducts.map((product) => (
-          <div key={product.id} className="bg-slate-50 p-4 rounded-lg shadow-md hover:bg-slate-200 transition duration-300 ease-in-out cursor-pointer">
+        {products.map((product) => (
+          <div key={product.id} className="bg-slate-50 p-4 rounded-lg shadow-md hover:bg-slate-200 transition duration-300 ease-in-out cursor-pointer" onClick={() => handleClick(product.id)}>
             <Image src={product.image} alt={product.name} width={300} height={300} priority />
             <div className="flex items-center justify-between mt-4">
               <h2 className="text-2xl text-slate-700">{product.name}</h2>
