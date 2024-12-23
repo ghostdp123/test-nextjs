@@ -83,18 +83,20 @@ export default function Page() {
           <div className="w-56">
             <h2 className="font-sans font-medium flex flex-row text-2xl mb-6">Total</h2>
             <p className="text-2xl font-bold text-red-400 mb-6">
-              ￥{ cartList.reduce( (acc, cartItem) => acc + cartItem.product.price * cartItem.quantity, 0).toFixed(2) }
+              ￥{cartList.reduce((acc, cartItem) => acc + cartItem.product.price * cartItem.quantity, 0).toFixed(2)}
             </p>
-            { isLogin ? (
+            {isLogin ? (
               <Button className="w-full">Checkout</Button>
             ) : (
               <>
-                <Button className="w-full">
-                  <Link href="/account">Login</Link>
-                </Button>
+                <Link href="/account">
+                  <Button className="w-full">
+                    Login
+                  </Button>
+                </Link>
                 <p className="text-sm text-slate-500 text-center mt-1">You need to login to checkout</p>
               </>
-            ) }
+            )}
           </div>
         </div>
       ) : (
