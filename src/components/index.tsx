@@ -5,5 +5,8 @@ import Footer from "./Footer";
 import AddCart from "./AddCart";
 import Login from "./Login";
 import Register from "./Register";
+import Account from "./Account";
+import NotAccount from "./NotAccount";
+import Cart from "./Cart";
 
-export { Header, Sort, Products, Footer, AddCart, Login, Register };
+export { Header, Sort, Products, Footer, AddCart, Login, Register, Account, NotAccount, Cart };

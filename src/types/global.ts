@@ -1,4 +1,3 @@
-
 export type Product = {
   id: string
   name: string
@@ -6,6 +5,18 @@ export type Product = {
   description: string
   image: string
   variant: string[]
+}
+
+export type ProductsAPI = {
+  status: number
+  body: string
+  data: Product[]
+}
+
+export type ProductAPI = {
+  status: number
+  body: string
+  data: Product
 }
 
 export type SortValue = 'latest' | 'low' | 'high'
@@ -16,4 +27,4 @@ export type CartItem = {
   selectedVariant: string
 }
 
-export type AccountType = 'login' | 'register'
+export type NotAccountType = 'login' | 'register'

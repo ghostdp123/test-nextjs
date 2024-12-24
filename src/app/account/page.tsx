@@ -1,13 +1,11 @@
-'use client'
-import { Login, Register } from "@/components"
-import { useState } from "react"
-import { AccountType } from "@/types/global"
+import { Account, NotAccount } from "@/components"
+import { authAction } from "@/lib/actions"
 
-export default function Page() {
-  const [accountType, setAccountType] = useState<AccountType>('login')
+export default async function Page() {
+  const auth = await authAction()
   return (
     <div className="container">
-      {accountType === 'login' ? <Login setAccountType={setAccountType} /> : <Register setAccountType={setAccountType} />}
+      {auth.status === 200 ? <Account email={auth.email} name={auth.name} /> : <NotAccount />}
     </div>
   )
 }

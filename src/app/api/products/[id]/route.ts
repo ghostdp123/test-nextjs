@@ -7,7 +7,8 @@ export async function GET(
   const id = (await params).id
   const result = await db('SELECT * FROM products WHERE id = $1', [id])
   return NextResponse.json({
-    code: 0,
+    status: 200,
+    body: 'get product success',
     data: result[0]
   })
 }

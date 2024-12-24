@@ -13,15 +13,20 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { AccountType } from "@/types/global"
+import { useToast } from "@/hooks/use-toast"
+import { NotAccountType } from "@/types/global"
 import { Dispatch, SetStateAction } from "react"
+import { loginAction } from "@/lib/actions"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email.' }).trim(),
   password: z.string().min(6, { message: 'Password must be at least 6 characters.' }),
 })
 
-export default function Login({ setAccountType }: { setAccountType: Dispatch<SetStateAction<AccountType>> }) {
+export default function Login({ setNotAccountType }: { setNotAccountType: Dispatch<SetStateAction<NotAccountType>> }) {
+  const router = useRouter()
+  const { toast } = useToast()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,8 +34,21 @@ export default function Login({ setAccountType }: { setAccountType: Dispatch<Set
       password: ''
     },
   })
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const res = await loginAction(values.email, values.password)
+    toast({
+      description: res.body,
+      duration: 2000,
+      style: { 
+        backgroundColor: res.status === 200 ? '#d4edda' : '#f8d7da', 
+        color: res.status === 200 ? '#155724' : '#721c24',
+      }
+    })
+    
+
+    if (res.status === 200) {
+      router.refresh()
+    }
   }
   return (
     <div className="w-[500px] mx-auto my-20">
@@ -67,7 +85,7 @@ export default function Login({ setAccountType }: { setAccountType: Dispatch<Set
           <Button className="w-full" type="submit">Sign in</Button>
         </form>
       </Form>
-      <p className="text-center text-sm mt-3">Not a member? <span className="underline text-orange-400 cursor-pointer" onClick={() => setAccountType('register')}>Join us.</span></p>
+      <p className="text-center text-sm mt-3">Not a member? <span className="underline text-orange-400 cursor-pointer" onClick={() => setNotAccountType('register')}>Join us.</span></p>
     </div>
   )
 }

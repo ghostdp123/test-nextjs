@@ -2,10 +2,10 @@
 
 import Image from "next/image"
 import { useSortStore } from "@/store"
-import { Product } from "@/types/global"
+import { ProductsAPI } from "@/types/global"
 import { useRouter } from "next/navigation"
 
-export default function Products({ result }: { result: { code: number; data: Product[] } }) {
+export default function Products({ result }: { result: ProductsAPI }) {
   const { value } = useSortStore()
   const products = [...result.data]
   if (value !== 'latest') {
