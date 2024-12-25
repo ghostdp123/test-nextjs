@@ -50,7 +50,7 @@ export default function Login({ setNotAccountType }: { setNotAccountType: Dispat
     }
   }
   return (
-    <div className="w-[500px] mx-auto my-20">
+    <div className="container2 my-20">
       <h1 className="text-xl mb-3 text-center font-bold">Welcome back</h1>
       <p className="text-center mb-6">Sign in to access an enhanced shopping experience.</p>
       <Form {...form}>

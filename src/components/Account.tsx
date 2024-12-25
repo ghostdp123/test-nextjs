@@ -14,7 +14,7 @@ export default function Account({ authData, addressesData }: { authData: JwtPayl
     }
   }
   return (
-    <div className="w-[500px] mx-auto py-10">
+    <div className="container2 py-10">
       <div className="border-b py-4">
         <h2 className="text-lg leading-10 font-bold">Account</h2>
         <div className="flex justify-between items-center">

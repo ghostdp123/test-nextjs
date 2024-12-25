@@ -9,5 +9,6 @@ import Account from "./Account";
 import NotAccount from "./NotAccount";
 import Cart from "./Cart";
 import Address from "./Address";
+import Checkout from "./Checkout";
 
-export { Header, Sort, Products, Footer, AddCart, Login, Register, Account, NotAccount, Cart, Address };
+export { Header, Sort, Products, Footer, AddCart, Login, Register, Account, NotAccount, Cart, Address, Checkout };

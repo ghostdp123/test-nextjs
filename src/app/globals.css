@@ -74,4 +74,7 @@ body {
   .container {
     @apply mx-auto w-[1140px];
   }
+  .container2 {
+    @apply mx-auto w-[500px];
+  }
 }
