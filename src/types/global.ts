@@ -1,5 +1,5 @@
 export type Product = {
-  id: string
+  id: number
   name: string
   price: number
   description: string
@@ -28,3 +28,20 @@ export type CartItem = {
 }
 
 export type NotAccountType = 'login' | 'register'
+/* 
+export type Auth = {
+  status: number
+  body: string
+  email: string 
+  name: string
+  userid: number
+} */
+
+export type Address = {
+  id: number
+  name: string
+  city: string
+  address: string
+  phone: string
+  userid: number
+}

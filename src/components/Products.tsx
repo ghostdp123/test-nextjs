@@ -12,7 +12,7 @@ export default function Products({ result }: { result: ProductsAPI }) {
     products.sort((a, b) => value === 'low' ? a.price - b.price : b.price - a.price)
   }
   const router = useRouter()
-  const handleClick = (id: string) => {
+  const handleClick = (id: number) => {
     router.push(`/detail/${id}`)
   }
   return (

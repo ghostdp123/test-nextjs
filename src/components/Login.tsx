@@ -45,7 +45,6 @@ export default function Login({ setNotAccountType }: { setNotAccountType: Dispat
       }
     })
     
-
     if (res.status === 200) {
       router.refresh()
     }

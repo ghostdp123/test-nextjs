@@ -87,13 +87,13 @@ export default function Cart({ status }: { status: number }) {
               ￥{cartList.reduce((acc, cartItem) => acc + cartItem.product.price * cartItem.quantity, 0).toFixed(2)}
             </p>
             {status === 200 ? (
-              <Button className="w-full">Checkout</Button>
+              <Link href="/checkout">
+                <Button className="w-full">Checkout</Button>
+              </Link>
             ) : (
               <>
                 <Link href="/account">
-                  <Button className="w-full">
-                    Login
-                  </Button>
+                  <Button className="w-full">Login</Button>
                 </Link>
                 <p className="text-sm text-slate-500 text-center mt-1">You need to login to checkout</p>
               </>

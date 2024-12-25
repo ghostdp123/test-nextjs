@@ -2,12 +2,14 @@
 import { ProductAPI, ProductsAPI } from "@/types/global"
 import Image from "next/image"
 import { AddCart } from "@/components"
+import { productAction, productsAction } from "@/lib/actions"
 
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-  const response = await fetch(`${process.env.NEXT_BASE_URL}/api/products`)
-  const result: ProductsAPI = await response.json()
+  // const response = await fetch(`${process.env.NEXT_BASE_URL}/api/products`)
+  // const result: ProductsAPI = await response.json()
+  const result = await productsAction()
   return result.data.map((product) => ({
     id: product.id + '',
   }))
@@ -15,8 +17,10 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const response = await fetch(`${process.env.NEXT_BASE_URL}/api/products/${id}`)
-  const result: ProductAPI = await response.json()
+  // const response = await fetch(`${process.env.NEXT_BASE_URL}/api/products/${id}`)
+  // const result: ProductAPI = await response.json()
+  // const product = result.data
+  const result: ProductAPI = await productAction(Number(id))
   const product = result.data
   return (
     <div className="container flex py-6">

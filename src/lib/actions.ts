@@ -1,7 +1,9 @@
 'use server'
+import { Product, Address } from "@/types/global"
 import db from "./db"
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import { cookies } from 'next/headers'
+import { revalidatePath } from "next/cache"
 const SECRET_KEY = 'DUYI-SECRET-KEY'
 
 export async function loginAction(email: string, password: string) {
@@ -14,7 +16,7 @@ export async function loginAction(email: string, password: string) {
     }
   } else {
     // 生成token并存储到cookie
-    const token = jwt.sign({ email, name: result[0].name }, SECRET_KEY, { expiresIn: '1h' })
+    const token = jwt.sign({ email, name: result[0].name, userid: result[0].id }, SECRET_KEY, { expiresIn: '1h' })
    
     cookie.set({
         name: 'token',
@@ -66,17 +68,61 @@ export async function authAction() {
         body: 'auth failed'
       }
     }
-    const result = jwt.verify(token.value, SECRET_KEY) as jwt.JwtPayload
+    const result = jwt.verify(token.value, SECRET_KEY) as JwtPayload
     return {
       status: 200,
       body: 'auth success',
-      email: result.email,
-      name: result.name
+      data: result
     }
   } catch (error) {
     return {
       status: 401,
       body: 'auth failed'
     }
+  }
+}
+
+export async function productsAction() {
+  const result = await db('SELECT * FROM products') as Product[]
+  return {
+    status: 200,
+    body: 'products success',
+    data: result
+  }  
+}
+
+export async function productAction(id: number) {
+  const result = await db('SELECT * FROM products WHERE id = $1', [id]) as Product[]
+  return {
+    status: 200,
+    body: 'get product success',
+    data: result[0]
+  }
+}
+
+export async function addAddressAction(name: string, city: string, address: string, phone: string, userid: number) {
+    await db('INSERT INTO addresses (name, city, address, phone, userid) VALUES ($1, $2, $3, $4, $5)', [name, city, address, phone, userid])
+    revalidatePath('/account')
+    return {
+      status: 200,
+      body: 'add address success'
+    }  
+}
+
+export async function addressesAction(userid: number) {
+  const result = await db('SELECT * FROM addresses WHERE userid = $1', [userid]) as Address[]
+  return {
+    status: 200,
+    body: 'addresses success',
+    data: result
+  }  
+}
+
+export async function removeAddressAction(id: number) {
+  await db('DELETE FROM addresses WHERE id = $1', [id])
+  revalidatePath('/account')
+  return {
+    status: 200,
+    body: 'remove address success'
   }
 }
